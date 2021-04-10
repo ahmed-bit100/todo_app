@@ -1,0 +1,46 @@
+import "./App.css";
+
+import React, { Component } from "react";
+
+export default class App extends Component {
+  state = {
+    count: 0,
+    isShown: true,
+    text: "",
+  };
+  inc = () => this.setState({ count: this.state.count + 1 });
+  dec = () =>
+    this.setState({
+      count: this.state.count > 0 ? this.state.count - 1 : this.state.count,
+    });
+  componentDidMount() {
+    console.log("the component mounted");
+  }
+  componentDidUpdate() {
+    console.log("component updated");
+  }
+  handleChange = (e) => this.setState({ text: e.target.value });
+  handleShow = () => this.setState({ isShown: !this.state.isShown });
+  render() {
+    return (
+      <div className="title">
+        <button onClick={this.handleShow}>
+          {" "}
+          {this.state.isShown ? "Hide" : "Show"}{" "}
+        </button>
+        {this.state.isShown ? (
+          <div>
+            <h1> Count: {this.state.count} </h1>
+            <button onClick={this.inc}>Increment</button>
+            <button onClick={this.dec}>Decrement</button>
+            <input
+              type="text"
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+}
